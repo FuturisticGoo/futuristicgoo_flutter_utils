@@ -13,6 +13,7 @@ class Loggify {
 
   factory Loggify.init({required String loggerName}) {
     if (_instance == null) {
+      hierarchicalLoggingEnabled = true;
       final dumpBuffer = StringBuffer();
       final logger = Logger(loggerName);
       _instance = Loggify._(dumpBuffer: dumpBuffer, logger: logger);

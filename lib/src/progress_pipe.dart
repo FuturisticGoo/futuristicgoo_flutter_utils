@@ -1,8 +1,18 @@
 import 'dart:async';
 
-sealed class ProgressType {}
+sealed class ProgressType {
+  const ProgressType();
+}
 
-abstract class ProgressUpdate extends ProgressType {}
+abstract class ProgressUpdate extends ProgressType {
+  final num finished;
+  final num? total;
+  const ProgressUpdate({
+    required this.finished,
+    required this.total,
+  });
+  double get percentageFinished => total == null ? 0 : finished / total!;
+}
 
 abstract class ProgressFinished extends ProgressType {}
 

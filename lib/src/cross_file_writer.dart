@@ -7,8 +7,8 @@ import 'package:pick_or_save/pick_or_save.dart';
 final class NoSaveFilePickedException {}
 
 abstract class CrossFileWriter {
-  Future<void> writeBytes({required Uint8List bytes});
-  Future<void> write({required Object object});
+  Future<void> writeBytes(Uint8List bytes);
+  Future<void> write(Object object);
   Future<void> close();
   const CrossFileWriter();
   static Future<CrossFileWriter> openFileForWriting({
@@ -47,12 +47,12 @@ class _DesktopFileWriter implements CrossFileWriter {
   }
 
   @override
-  Future<void> writeBytes({required Uint8List bytes}) async {
+  Future<void> writeBytes(Uint8List bytes) async {
     ioSink.add(bytes);
   }
 
   @override
-  Future<void> write({required Object object}) async {
+  Future<void> write(Object object) async {
     ioSink.write(object);
   }
 
@@ -86,12 +86,12 @@ class _AndroidFileWriter implements CrossFileWriter {
   }
 
   @override
-  Future<void> writeBytes({required Uint8List bytes}) async {
+  Future<void> writeBytes(Uint8List bytes) async {
     ioSink.add(bytes);
   }
 
   @override
-  Future<void> write({required Object object}) async {
+  Future<void> write(Object object) async {
     ioSink.write(object);
   }
 

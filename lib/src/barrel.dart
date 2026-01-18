@@ -4,3 +4,4 @@ export 'snackbar.dart';
 export 'loggify.dart';
 export 'list_tile_heading.dart';
 export 'cross_file_writer.dart';
+export 'progress_pipe.dart';

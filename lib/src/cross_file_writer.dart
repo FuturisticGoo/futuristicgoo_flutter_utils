@@ -9,6 +9,7 @@ final class NoSaveFilePickedException {}
 abstract class CrossFileWriter {
   Future<void> writeBytes(Uint8List bytes);
   Future<void> write(Object object);
+  Future<void> flush();
   Future<void> close();
   const CrossFileWriter();
   static Future<CrossFileWriter> openFileForWriting({
@@ -57,6 +58,11 @@ class _DesktopFileWriter implements CrossFileWriter {
   }
 
   @override
+  Future<void> flush() async {
+    await ioSink.flush();
+  }
+
+  @override
   Future<void> close() async {
     await ioSink.flush();
     await ioSink.close();
@@ -93,6 +99,11 @@ class _AndroidFileWriter implements CrossFileWriter {
   @override
   Future<void> write(Object object) async {
     ioSink.write(object);
+  }
+
+  @override
+  Future<void> flush() async {
+    await ioSink.flush();
   }
 
   @override

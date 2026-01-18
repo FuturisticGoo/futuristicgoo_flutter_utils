@@ -1,7 +1,11 @@
 import 'dart:async';
 
-sealed class ProgressType {
+import 'package:equatable/equatable.dart';
+
+sealed class ProgressType extends Equatable {
   const ProgressType();
+  @override
+  List<Object?> get props => [];
 }
 
 abstract class ProgressUpdate extends ProgressType {
@@ -11,7 +15,9 @@ abstract class ProgressUpdate extends ProgressType {
     required this.finished,
     required this.total,
   });
-  double get percentageFinished => total == null ? 0 : finished / total!;
+  double? get percentageFinished => total == null ? null : finished / total!;
+  @override
+  List<Object?> get props => [finished, total];
 }
 
 abstract class ProgressFinished extends ProgressType {}
